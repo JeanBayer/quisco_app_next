@@ -33,6 +33,13 @@ const QuioscoProvider = ({ children }) => {
   const handleSetModal = () => setModal(!modal);
 
   const handleAgregarPedido = ({ categoriaId, imagen, ...producto }) => {
+    if (pedido.some((elementoState) => elementoState.id === producto.id)) {
+      const newArrayPedido = pedido.map((elementoState) =>
+        elementoState.id === producto.id ? producto : elementoState
+      );
+      setPedido(newArrayPedido);
+      return;
+    }
     setPedido([...pedido, producto]);
   };
 
