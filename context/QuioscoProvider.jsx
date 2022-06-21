@@ -33,7 +33,8 @@ const QuioscoProvider = ({ children }) => {
   const handleSetModal = () => setModal(!modal);
 
   const handleAgregarPedido = ({ categoriaId, imagen, ...producto }) => {
-    if (pedido.some((elementoState) => elementoState.id === producto.id)) {
+    setModal(false);
+    if (existProductInOrder(producto.id)) {
       const newArrayPedido = pedido.map((elementoState) =>
         elementoState.id === producto.id ? producto : elementoState
       );
@@ -41,6 +42,10 @@ const QuioscoProvider = ({ children }) => {
       return;
     }
     setPedido([...pedido, producto]);
+  };
+
+  const existProductInOrder = (id) => {
+    return pedido.some((elementoState) => elementoState.id === id);
   };
 
   return (
@@ -53,6 +58,7 @@ const QuioscoProvider = ({ children }) => {
         handleSetProducto,
         modal,
         handleSetModal,
+        pedido,
         handleAgregarPedido,
       }}
     >

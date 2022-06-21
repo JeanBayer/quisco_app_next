@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import useQuiosco from "hooks/useQuiosco";
 import formatearDinero from "helpers";
 
 const ModalProducto = () => {
   const [cantidad, setCantidad] = useState(1);
-  const { producto, handleSetModal, handleAgregarPedido } = useQuiosco();
-  const { nombre, imagen, precio } = producto;
+  const [edicion, setEdicion] = useState(false);
+  const { producto, handleSetModal, handleAgregarPedido, pedido } =
+    useQuiosco();
+  const { nombre, imagen, precio, id } = producto;
+
+  useEffect(() => {
+    const productoPedido = pedido.find(
+      (elementoState) => elementoState.id === id
+    );
+    if (productoPedido) {
+      setCantidad(productoPedido.cantidad);
+      setEdicion(true);
+    }
+  }, []);
 
   const decreaseQuantity = () => {
     if (cantidad <= 1) return;
@@ -89,7 +101,7 @@ const ModalProducto = () => {
           className="bg-indigo-500 hover:bg-indigo-800 px-5 py2 mt-5 text-white font-bold uppercase rounded"
           onClick={() => handleAgregarPedido({ ...producto, cantidad })}
         >
-          añadir al pedido
+          {edicion ? "Guardar cambios" : "añadir al pedido"}
         </button>
       </div>
     </div>
