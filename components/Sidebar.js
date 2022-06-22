@@ -8,11 +8,11 @@ const Sidebar = () => {
     <>
       <Image
         width={300}
-        height={100}
+        height={200}
         src="/assets/img/logo.svg"
         alt="logo imagen"
       />
-      <nav className="mt-10">
+      <nav className="mt-1 sm:mt-10">
         {categorias &&
           categorias.map((categoria) => (
             <Categoria key={categoria.id} categoria={categoria}></Categoria>

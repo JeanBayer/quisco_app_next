@@ -8,8 +8,8 @@ export default function Home() {
   const { productos } = categoriaActual ?? { productos: [] };
   return (
     <Layout pagina={`Menu ${nombre}`}>
-      <h1 className="text-4xl from-black">{nombre}</h1>
-      <p>Elige y personaliza tu pedido a continuación</p>
+      <h1 className="text-xl sm:text-2xl md:text-4xl font-black pb-3">{nombre}</h1>
+      <p className="pb-3">Elige y personaliza tu pedido a continuación</p>
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {productos?.map((producto) => (
           <Producto key={producto.id} producto={producto} />

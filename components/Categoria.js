@@ -15,7 +15,8 @@ const Categoria = ({ categoria }) => {
       : null;
   return (
     <div
-      className={`flex items-center gap-4 w-full border p-5 hover:bg-amber-400 ${color}`}
+      onClick={() => handleClickCategoria(id)}
+      className={`flex justify-center md:justify-start items-center md:gap-4 w-full border p-2 md:p-3 hover:bg-amber-400 ${color}`}
     >
       <Image
         width={70}
@@ -23,12 +24,9 @@ const Categoria = ({ categoria }) => {
         src={`/assets/img/icono_${icono}.svg`}
         alt="logo categoria"
       />
-      <button
-        className="text-2xl font-bold hover:cursor-pointer"
-        onClick={() => handleClickCategoria(id)}
-      >
+      <p className="hidden md:block text-sm font-bold hover:cursor-pointer">
         {nombre}
-      </button>
+      </p>
     </div>
   );
 };

@@ -11,14 +11,18 @@ export default function Total() {
 
   return (
     <Layout pagina="Resumen">
-      <h1 className="text-4xl font-black">Total y Confirmar Pedido</h1>
-      <p className="text-2xl my-10">Confirma tu Pedido a Continuación</p>
+      <h1 className="text-xl md:text-4xl font-black">
+        Total y Confirmar Pedido
+      </h1>
+      <p className="text-md md:text-2xl mb-4 md:my-10">
+        Confirma tu Pedido a Continuación
+      </p>
 
       <form onSubmit={colocarOrden}>
         <div>
           <label
             htmlFor="nombre"
-            className="block uppercase text-slate-800 font-bold text-xl"
+            className="block uppercase text-slate-800 font-bold md:text-xl"
           >
             Nombre
           </label>
@@ -31,7 +35,7 @@ export default function Total() {
           />
         </div>
         <div className="mt-10">
-          <p className="text-2xl">
+          <p className="text-xl md:text-2xl">
             Total a pagar{" "}
             <span className="font-bold">{formatearDinero(total)}</span>
           </p>

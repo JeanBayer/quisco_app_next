@@ -45,7 +45,7 @@ const ModalProducto = () => {
           <button onClick={handleSetModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-9 w-9 fill-amber-500 hover:fill-amber-600"
+              className="h-8 w-8 md:h-9 md:w-9 fill-amber-500 hover:fill-amber-600"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -57,16 +57,15 @@ const ModalProducto = () => {
             </svg>
           </button>
         </div>
-        <h1 className="text-3xl font-bold mt-5">{nombre}</h1>
-        <p className="mt-5 font-black text-5xl text-amber-500">
+        <h1 className="text-lg md:text-3xl font-bold md:mt-5">{nombre}</h1>
+        <p className="md:mt-5 font-black text-xl md:text-5xl text-amber-500">
           {formatearDinero(precio)}
         </p>
-
-        <div className="flex w-full gap-4 mt-5">
+        <div className="flex w-full gap-4 mt-2 md:mt-5">
           <button onClick={decreaseQuantity}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
+              className="h-6 w-6 md:h-8 md:w-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -79,11 +78,11 @@ const ModalProducto = () => {
               />
             </svg>
           </button>
-          <p className="text-3xl">{cantidad}</p>
+          <p className="text-xl md:text-3xl">{cantidad}</p>
           <button onClick={increaseQuantity}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
+              className="h-6 w-6 md:h-8 md:w-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -98,7 +97,7 @@ const ModalProducto = () => {
           </button>
         </div>
         <button
-          className="bg-indigo-500 hover:bg-indigo-800 px-5 py2 mt-5 text-white font-bold uppercase rounded"
+          className="w-full mx-auto bg-indigo-500 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
           onClick={() => handleAgregarPedido({ ...producto, cantidad })}
         >
           {edicion ? "Guardar cambios" : "añadir al pedido"}
