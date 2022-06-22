@@ -51,6 +51,13 @@ const QuioscoProvider = ({ children }) => {
     return pedido.some((elementoState) => elementoState.id === id);
   };
 
+  const handlerDeleteProduct = (id) => {
+    const newArrayPedido = pedido.filter(
+      (pedidoState) => pedidoState.id !== id
+    );
+    setPedido(newArrayPedido);
+  };
+
   return (
     <QuioscoContext.Provider
       value={{
@@ -63,6 +70,7 @@ const QuioscoProvider = ({ children }) => {
         handleSetModal,
         pedido,
         handleAgregarPedido,
+        handlerDeleteProduct
       }}
     >
       {children}
