@@ -11,6 +11,8 @@ const QuioscoProvider = ({ children }) => {
   const [producto, setProducto] = useState({});
   const [modal, setModal] = useState(false);
   const [pedido, setPedido] = useState([]);
+  const [nombre, setNombre] = useState("");
+  const [total, setTotal] = useState(0);
 
   const router = useRouter();
 
@@ -26,6 +28,15 @@ const QuioscoProvider = ({ children }) => {
   useEffect(() => {
     setCategoriaActual(categorias[0]);
   }, [categorias]);
+
+  useEffect(() => {
+    const totalAPagar = pedido.reduce(
+      (previousValue, pedido) =>
+        previousValue + pedido.precio * pedido.cantidad,
+      0
+    );
+    setTotal(totalAPagar);
+  }, [pedido]);
 
   const handleClickCategoria = (id) => {
     const categoria = categorias.filter((cat) => cat.id === id)[0];
@@ -51,15 +62,41 @@ const QuioscoProvider = ({ children }) => {
     toast.success("Agregado al pedido");
   };
 
-  const existProductInOrder = (id) => {
-    return pedido.some((elementoState) => elementoState.id === id);
-  };
+  const existProductInOrder = (id) =>
+    pedido.some((elementoState) => elementoState.id === id);
 
   const handlerDeleteProduct = (id) => {
     const newArrayPedido = pedido.filter(
       (pedidoState) => pedidoState.id !== id
     );
     setPedido(newArrayPedido);
+  };
+
+  const colocarOrden = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post("/api/ordenes", {
+        nombre,
+        total,
+        fecha: Date.now().toString(),
+        pedido,
+      });
+
+      //Resetear App
+      setCategoriaActual(categorias[0]);
+      setPedido([]);
+      setNombre("");
+      setTotal(0);
+
+      toast.success("Pedido realizado correctamente");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -75,6 +112,10 @@ const QuioscoProvider = ({ children }) => {
         pedido,
         handleAgregarPedido,
         handlerDeleteProduct,
+        nombre,
+        setNombre,
+        colocarOrden,
+        total,
       }}
     >
       {children}
