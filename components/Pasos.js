@@ -20,7 +20,7 @@ const Pasos = () => {
     // sacamos el porcentaje que vale cada paso
     const porcentajePaso = 100 / cantidadTotalPasos;
     // retornamos el porcentaje de ese paso menos su 70% para que sea mas pequeña la barra
-    return paso * porcentajePaso - porcentajePaso * 0.7;
+    return paso * porcentajePaso - porcentajePaso * 0.6;
   };
 
   return (
