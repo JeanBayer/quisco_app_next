@@ -1,10 +1,18 @@
 import Image from "next/image";
 import useQuiosco from "hooks/useQuiosco";
+import { useRouter } from "next/router";
 
 const Categoria = ({ categoria }) => {
   const { categoriaActual, handleClickCategoria } = useQuiosco();
+  const router = useRouter();
+
   const { nombre, icono, id } = categoria;
-  const color = categoriaActual?.id === id ? "bg-amber-400" : null;
+  const color =
+    router.pathname !== "/"
+      ? null
+      : categoriaActual?.id === id
+      ? "bg-amber-400"
+      : null;
   return (
     <div
       className={`flex items-center gap-4 w-full border p-5 hover:bg-amber-400 ${color}`}
