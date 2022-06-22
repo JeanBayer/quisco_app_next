@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const QuioscoContext = createContext();
 
@@ -39,9 +40,11 @@ const QuioscoProvider = ({ children }) => {
         elementoState.id === producto.id ? producto : elementoState
       );
       setPedido(newArrayPedido);
+      toast.success("Pedido Actualizado");
       return;
     }
     setPedido([...pedido, producto]);
+    toast.success("Agregado al pedido");
   };
 
   const existProductInOrder = (id) => {
